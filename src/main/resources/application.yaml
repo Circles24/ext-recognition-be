@@ -1,0 +1,12 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/recognition_db
+    username: 24circles
+    password: root
+server:
+  servlet:
+    context-path: /recognition/api
