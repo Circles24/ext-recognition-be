@@ -22,6 +22,8 @@ public class ExternalRecognition {
 
     private String description;
 
+    private String externalLinks;
+
     @Enumerated(value = EnumType.STRING)
     private ExternalRecognitionStatus status;
 
