@@ -1,9 +1,12 @@
 package com.circles24.service;
 
 import com.circles24.constant.ExternalRecognitionStatus;
+import com.circles24.dto.PaginationInfoDto;
 import com.circles24.model.ExternalRecognition;
 import com.circles24.repository.ExternalRecognitionRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +18,25 @@ public class ExternalRecognitionService {
 
     private final ExternalRecognitionRepository externalRecognitionRepository;
 
-    public List<ExternalRecognition> list() {
-        return externalRecognitionRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+    private static final int PAGE_SIZE = 5;
+
+    public List<ExternalRecognition> list(int page) {
+        Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE, Sort.by("createdAt").descending());
+        return externalRecognitionRepository.findAll(pageable);
     }
 
     public ExternalRecognition create(ExternalRecognition externalRecognition) {
         externalRecognition.setStatus(ExternalRecognitionStatus.ACTIVE);
         return externalRecognitionRepository.save(externalRecognition);
+    }
+
+    public PaginationInfoDto getPaginationInfo() {
+        long totalCount = externalRecognitionRepository.count();
+        long pageCount = (totalCount + PAGE_SIZE - 1L) / PAGE_SIZE;
+
+        return PaginationInfoDto.builder()
+                .pageCount(pageCount)
+                .pageSize(PAGE_SIZE)
+                .build();
     }
 }
