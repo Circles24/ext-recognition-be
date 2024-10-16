@@ -7,6 +7,12 @@ spring:
     url: jdbc:postgresql://localhost:5432/recognition_db
     username: 24circles
     password: root
+
+  servlet:
+    multipart:
+      max-file-size: 100000000
+      max-request-size: 100000000
 server:
   servlet:
     context-path: /recognition/api
+

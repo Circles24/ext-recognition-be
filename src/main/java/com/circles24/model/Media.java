@@ -8,7 +8,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Blob;
 import java.sql.Timestamp;
 
 @Data
@@ -31,6 +30,12 @@ public class Media {
 
     @Lob
     private byte[] mediaContent;
+
+    private String fileName;
+
+    private String fileExtension;
+
+    private String mimeType;
 
     private ExternalRecognitionMediaStatus status;
 
