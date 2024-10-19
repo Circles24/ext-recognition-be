@@ -20,6 +20,8 @@ public class ExternalRecognitionService {
 
     private static final int PAGE_SIZE = 5;
 
+    private static final int TOP_INTERACTED_RECOGNITIONS_SIZE = 10;
+
     public List<ExternalRecognition> list(int page) {
         Pageable pageable = PageRequest.of(page - 1, PAGE_SIZE, Sort.by("createdAt").descending());
         return externalRecognitionRepository.findAll(pageable);
@@ -42,5 +44,11 @@ public class ExternalRecognitionService {
                 .pageCount(pageCount)
                 .pageSize(PAGE_SIZE)
                 .build();
+    }
+
+    public List<ExternalRecognition> getTopInteractedRecognitions() {
+        Pageable pageable = PageRequest.of(0, TOP_INTERACTED_RECOGNITIONS_SIZE, Sort.by("createdAt")
+                .descending());
+        return externalRecognitionRepository.findAll(pageable);
     }
 }

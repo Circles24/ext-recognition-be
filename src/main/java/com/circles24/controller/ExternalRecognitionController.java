@@ -34,4 +34,9 @@ public class ExternalRecognitionController {
     public PaginationInfoDto getPaginationInfo() {
         return externalRecognitionService.getPaginationInfo();
     }
+
+    @GetMapping("/top-interacted")
+    public List<ExternalRecognition> getTopInteractedRecognitions() {
+        return externalRecognitionService.getTopInteractedRecognitions();
+    }
 }
