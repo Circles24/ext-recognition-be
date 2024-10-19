@@ -25,6 +25,10 @@ public class ExternalRecognitionService {
         return externalRecognitionRepository.findAll(pageable);
     }
 
+    public ExternalRecognition get(int id) {
+        return externalRecognitionRepository.findById(id).orElseThrow(() -> new RuntimeException("not found"));
+    }
+
     public ExternalRecognition create(ExternalRecognition externalRecognition) {
         externalRecognition.setStatus(ExternalRecognitionStatus.ACTIVE);
         return externalRecognitionRepository.save(externalRecognition);

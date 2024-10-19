@@ -20,6 +20,11 @@ public class ExternalRecognitionController {
         return externalRecognitionService.list(page);
     }
 
+    @GetMapping("/{id}")
+    public ExternalRecognition list(@PathVariable("id") Integer id) {
+        return externalRecognitionService.get(id);
+    }
+
     @PostMapping()
     public ExternalRecognition create(@RequestBody ExternalRecognition externalRecognition) {
         return externalRecognitionService.create(externalRecognition);
